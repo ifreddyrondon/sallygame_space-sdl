@@ -41,7 +41,7 @@ func newBasicEnemy(renderer *sdl.Renderer, position model.Vector) (*model.Elemen
 		model.WithElemActive(),
 		model.WithElemCircleCollision(basicEnemyCollisionRadius),
 		drawer.WithAnimatorRenderer(sequences, "idle"),
-		model.WithElemColliderrFn(func(elem *model.Element) (model.Collider, error) {
+		model.WithElemColliderFn(func(elem *model.Element) (model.Collider, error) {
 			comp, err := newBasicEnemyCollider(elem)
 			if err != nil {
 				return nil, err

@@ -9,7 +9,7 @@ type DeactivateCollider struct {
 }
 
 func WithDeactivateCollider() model.ElemOptFunc {
-	return model.WithElemColliderrFn(func(elem *model.Element) (model.Collider, error) {
+	return model.WithElemColliderFn(func(elem *model.Element) (model.Collider, error) {
 		return NewDeactivateCollider(elem), nil
 	})
 }

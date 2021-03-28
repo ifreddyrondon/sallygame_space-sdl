@@ -105,7 +105,7 @@ func WithElemCollider(comp Collider) ElemOptFunc {
 	}
 }
 
-func WithElemColliderrFn(fn func(elem *Element) (Collider, error)) ElemOptFunc {
+func WithElemColliderFn(fn func(elem *Element) (Collider, error)) ElemOptFunc {
 	return func(elem *Element) error {
 		comp, err := fn(elem)
 		if err != nil {
