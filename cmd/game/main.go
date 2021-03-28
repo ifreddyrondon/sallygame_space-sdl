@@ -16,7 +16,7 @@ const (
 	ScreenHeight = 800
 	winTitle     = "Clue"
 
-	tgtTicksPerSeconds = 60 // a.k.a FPS
+	fps = 60 // target ticks per seconds
 )
 
 var (
@@ -95,9 +95,8 @@ func main() {
 	for {
 		fmeStartTime := time.Now()
 		for evt := sdl.PollEvent(); evt != nil; evt = sdl.PollEvent() {
-			switch evt.(type) {
-			case *sdl.QuitEvent:
-				fmt.Println("quit")
+			switch evt.GetType() {
+			case sdl.QUIT:
 				// TODO: destroy elements
 				return
 			}
@@ -105,7 +104,7 @@ func main() {
 
 		_ = renderer.Clear()
 		for _, elem := range elements {
-			if err := elem.Update(); err != nil {
+			if err := elem.Update(delta); err != nil {
 				_, _ = fmt.Fprintf(os.Stderr, "error updating element. Err: %v\n", err)
 				return
 			}
@@ -120,6 +119,6 @@ func main() {
 			return
 		}
 		renderer.Present()
-		delta = time.Since(fmeStartTime).Seconds() * tgtTicksPerSeconds
+		delta = time.Since(fmeStartTime).Seconds() * fps
 	}
 }

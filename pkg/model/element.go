@@ -131,7 +131,7 @@ func checkCollider(elem *Element, comp Collider) error {
 type ElemOptFunc func(opts *Element) error
 
 type Updater interface {
-	OnUpdate() error
+	OnUpdate(delta float64) error
 }
 
 type Drawer interface {
@@ -195,12 +195,12 @@ func (e *Element) Draw(renderer *sdl.Renderer) error {
 	return nil
 }
 
-func (e *Element) Update() error {
+func (e *Element) Update(delta float64) error {
 	if !e.Active {
 		return nil
 	}
 	for _, comp := range e.updaters {
-		if err := comp.OnUpdate(); err != nil {
+		if err := comp.OnUpdate(delta); err != nil {
 			return err
 		}
 	}

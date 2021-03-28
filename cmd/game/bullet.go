@@ -20,7 +20,7 @@ func newBullet(renderer *sdl.Renderer) (*model.Element, error) {
 	return model.NewElement(
 		model.WithElemCircleCollision(bulletCollisionRadius),
 		drawer.WithSpriteRenderer(renderer, fmt.Sprintf("%s/player_bullet.bmp", assetsDir)),
-		updater.WithBulletMover(bulletSpeed, &delta),
+		updater.WithBulletMover(bulletSpeed),
 		collider.WithDeactivateCollider(),
 	)
 }

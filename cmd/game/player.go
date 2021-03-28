@@ -22,7 +22,7 @@ func newPlayer(renderer *sdl.Renderer, bullets []*model.Element) (*model.Element
 		model.WithElemPosition(model.Vector{X: ScreenWidth / 2.0, Y: ScreenHeight - playerSize/2.0}), // bottom center
 		model.WithElemActive(),
 		drawer.WithSpriteRenderer(renderer, fmt.Sprintf("%s/player.bmp", assetsDir)),
-		updater.WithKeyboardMover(playerSpeed, &delta),
+		updater.WithKeyboardMover(playerSpeed),
 		updater.WithKeyboardShooter(model.NewPool(bullets), playerShotCoolDown),
 	)
 }

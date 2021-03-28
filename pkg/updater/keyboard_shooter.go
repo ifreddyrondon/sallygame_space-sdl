@@ -32,7 +32,7 @@ func NewKeyboardShooter(container *model.Element, bullets model.Pool, coolDown t
 	}
 }
 
-func (ks *KeyboardShooter) OnUpdate() error {
+func (ks *KeyboardShooter) OnUpdate(delta float64) error {
 	keys := sdl.GetKeyboardState()
 	if keys[sdl.SCANCODE_SPACE] == 1 {
 		if time.Since(ks.lastShot) >= ks.coolDown {
