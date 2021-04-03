@@ -14,14 +14,14 @@ type SpriteRenderer struct {
 }
 
 func WithSpriteRenderer(renderer *sdl.Renderer, filename string) model.ElemOptFunc {
-	fn := func(elem *model.Element) (model.Drawer, error) {
+	builderFn := func(elem *model.Element) (model.Drawer, error) {
 		comp, err := NewSpriteRenderer(elem, renderer, filename)
 		if err != nil {
 			return nil, err
 		}
 		return comp, err
 	}
-	return model.WithElemDrawerFn(fn)
+	return model.WithElemDrawerFn(builderFn)
 }
 
 func NewSpriteRenderer(container *model.Element, renderer *sdl.Renderer, filename string) (*SpriteRenderer, error) {

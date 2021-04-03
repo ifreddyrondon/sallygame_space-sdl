@@ -16,26 +16,19 @@ type KeyboardMover struct {
 }
 
 func WithKeyboardMover(speed float64) model.ElemOptFunc {
-	return model.WithElemUpdaterFn(func(elem *model.Element) (model.Updater, error) {
-		comp, err := NewKeyboardMover(elem, speed)
+	builderFn := func(elem *model.Element) (model.Updater, error) {
+		sr, err := elem.Drawer(&drawer.SpriteRenderer{})
 		if err != nil {
 			return nil, err
 		}
+		comp := &KeyboardMover{
+			container: elem,
+			speed:     speed,
+			sr:        sr.(*drawer.SpriteRenderer),
+		}
 		return comp, nil
-	})
-
-}
-
-func NewKeyboardMover(container *model.Element, speed float64) (*KeyboardMover, error) {
-	sr, err := container.Drawer(&drawer.SpriteRenderer{})
-	if err != nil {
-		return nil, err
 	}
-	return &KeyboardMover{
-		container: container,
-		speed:     speed,
-		sr:        sr.(*drawer.SpriteRenderer),
-	}, nil
+	return model.WithElemUpdaterFn(builderFn)
 }
 
 func (km KeyboardMover) OnUpdate(delta float64) error {

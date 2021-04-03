@@ -15,14 +15,14 @@ import (
 var errMissingDefaultSequence = errors.New("missing default sequence")
 
 func WithAnimatorRenderer(sequences map[string]*AnimationSequence, defaultSequence string) model.ElemOptFunc {
-	fn := func(elem *model.Element) (model.Drawer, error) {
+	builderFn := func(elem *model.Element) (model.Drawer, error) {
 		comp, err := NewAnimator(elem, sequences, defaultSequence)
 		if err != nil {
 			return nil, err
 		}
 		return comp, err
 	}
-	return model.WithElemDrawerFn(fn)
+	return model.WithElemDrawerFn(builderFn)
 }
 
 type AnimatorRenderer struct {

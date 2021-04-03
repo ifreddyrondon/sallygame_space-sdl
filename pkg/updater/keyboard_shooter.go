@@ -19,17 +19,14 @@ type KeyboardShooter struct {
 }
 
 func WithKeyboardShooter(bullets model.Pool, coolDown time.Duration) model.ElemOptFunc {
-	return model.WithElemUpdaterFn(func(elem *model.Element) (model.Updater, error) {
-		return NewKeyboardShooter(elem, bullets, coolDown), nil
-	})
-}
-
-func NewKeyboardShooter(container *model.Element, bullets model.Pool, coolDown time.Duration) *KeyboardShooter {
-	return &KeyboardShooter{
-		container: container,
-		bullets:   bullets,
-		coolDown:  coolDown,
+	builderFn := func(elem *model.Element) (model.Updater, error) {
+		return &KeyboardShooter{
+			container: elem,
+			bullets:   bullets,
+			coolDown:  coolDown,
+		}, nil
 	}
+	return model.WithElemUpdaterFn(builderFn)
 }
 
 func (ks *KeyboardShooter) OnUpdate(delta float64) error {

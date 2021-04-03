@@ -13,16 +13,13 @@ type BulletMover struct {
 }
 
 func WithBulletMover(speed float64) model.ElemOptFunc {
-	return model.WithElemUpdaterFn(func(elem *model.Element) (model.Updater, error) {
-		return NewBulletMover(elem, speed), nil
-	})
-}
-
-func NewBulletMover(container *model.Element, speed float64) *BulletMover {
-	return &BulletMover{
-		container: container,
-		speed:     speed,
+	builderFn := func(elem *model.Element) (model.Updater, error) {
+		return &BulletMover{
+			container: elem,
+			speed:     speed,
+		}, nil
 	}
+	return model.WithElemUpdaterFn(builderFn)
 }
 
 func (b BulletMover) OnUpdate(delta float64) error {
