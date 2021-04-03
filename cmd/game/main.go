@@ -1,9 +1,9 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/veandco/go-sdl2/sdl"
 
@@ -95,29 +95,20 @@ func run() error {
 	elements = append(elements, plr)
 
 	_ = renderer.SetDrawColor(255, 255, 255, 255)
+
+	ctx, cancel := context.WithCancel(context.Background())
+	errCh := loop(ctx, renderer, elements)
+
 	for {
-		fmeStartTime := time.Now()
-		for evt := sdl.PollEvent(); evt != nil; evt = sdl.PollEvent() {
+		select {
+		case err := <-errCh:
+			return err
+		default:
+			evt := sdl.WaitEvent()
 			switch evt.GetType() {
 			case sdl.QUIT:
-				return nil
+				cancel()
 			}
 		}
-
-		_ = renderer.Clear()
-		for _, elem := range elements {
-			if err := elem.Update(delta); err != nil {
-				return fmt.Errorf("error updating element. %w", err)
-			}
-			if err := elem.Draw(renderer); err != nil {
-				return fmt.Errorf("error drawing element. %w", err)
-			}
-		}
-
-		if err := model.CheckCollisions(elements); err != nil {
-			return fmt.Errorf("error checking collisions. %w", err)
-		}
-		renderer.Present()
-		delta = time.Since(fmeStartTime).Seconds() * fps
 	}
 }
