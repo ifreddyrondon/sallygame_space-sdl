@@ -7,7 +7,7 @@ import (
 
 	"github.com/veandco/go-sdl2/sdl"
 
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/model"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/model"
 )
 
 func loop(ctx context.Context, renderer *sdl.Renderer, elems []*model.Element) <-chan error {

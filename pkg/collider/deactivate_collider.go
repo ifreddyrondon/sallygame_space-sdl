@@ -1,7 +1,7 @@
 package collider
 
 import (
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/model"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/model"
 )
 
 type DeactivateCollider struct {

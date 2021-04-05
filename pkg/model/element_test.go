@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/model"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/model"
 )
 
 type mockUpdater struct{}

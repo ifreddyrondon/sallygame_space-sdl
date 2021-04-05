@@ -1,4 +1,4 @@
-module github.com/ifreddyrondon/sallygames_clue-all
+module github.com/ifreddyrondon/sallygames_space-sdl
 
 go 1.15
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/veandco/go-sdl2/sdl"
 
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/model"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/model"
 )
 
 func textureFromBMP(renderer *sdl.Renderer, filename string) (*sdl.Texture, error) {

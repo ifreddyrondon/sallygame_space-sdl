@@ -3,8 +3,8 @@ package updater
 import (
 	"math"
 
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/model"
-	"github.com/ifreddyrondon/sallygames_clue-all/pkg/screen"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/model"
+	"github.com/ifreddyrondon/sallygames_space-sdl/pkg/screen"
 )
 
 type BulletMover struct {
